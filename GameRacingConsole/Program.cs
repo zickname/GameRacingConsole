@@ -1,8 +1,13 @@
 ﻿using GameRacingConsole;
 
 var game = new RaceGame();
-//Console.WriteLine($"Чтобы начать игру, нажмите 'Enter': ");
-//if (Console.ReadKey().Key == ConsoleKey.Enter)
-//{
-    game.RunRace();
-//}
+
+Console.Write($"Чтобы начать игру, нажмите 'Enter': ");
+
+while (true)
+{
+    if (Console.ReadKey(true).Key == ConsoleKey.Enter)
+    {
+        game.RunRace();
+    }
+}

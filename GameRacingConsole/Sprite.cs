@@ -6,7 +6,7 @@ struct Sprite
 
     public Sprite()
     {
-        SpriteCar = new char[,]
+        SpriteCar = new[,]
         {
             { ' ', ' ', '_', '_', '_', '\0', '\0', '\0', '\0', '\0' },
             { ' ', '/', '_', '|', '_', '\\', '_', '_', '_', '\0' },

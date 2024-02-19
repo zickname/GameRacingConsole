@@ -36,16 +36,26 @@ class RaceGame
 
     private void CheckWinner()
     {
-        if (_car1.X + _car1.GetShape().GetLength(1) <= Road.RoadLength - 1 &&
-            _car2.X + _car1.GetShape().GetLength(1) <= Road.RoadLength - 1) return;
+        int carWidth = _car1.GetShape().GetLength(1);
+        
+        if (_car1.X + carWidth <= Road.RoadLength - 1 &&
+            _car2.X + carWidth <= Road.RoadLength - 1) return;
         _raceOver = true;
+        
         Console.WriteLine("Гонка завершена!");
-        if (_car1.X + _car1.GetShape().GetLength(1) > Road.RoadLength - 1 &&
-            _car2.X + _car1.GetShape().GetLength(1) > Road.RoadLength - 1)
-            Console.WriteLine("Ничья!");
-        else if (_car1.X + _car1.GetShape().GetLength(1) > Road.RoadLength - 1)
-            Console.WriteLine($"{_car1.Name} победил!");
-        else
-            Console.WriteLine($"{_car2.Name} победил!");
+        
+        switch (_car1.X + carWidth)
+        {
+            case > Road.RoadLength - 1 when
+                _car2.X + carWidth > Road.RoadLength - 1:
+                Console.WriteLine("Ничья!");
+                break;
+            case > Road.RoadLength - 1:
+                Console.WriteLine($"{_car1.Name} победил!");
+                break;
+            default:
+                Console.WriteLine($"{_car2.Name} победил!");
+                break;
+        }
     }
 }

@@ -2,14 +2,13 @@
 
 class Road
 {
-    private const int RoadHeight = 9;
-    private readonly List<string> _road;
-    private const char _borderChar = '#';
     public const int RoadLength = 150;
+    private const int RoadHeight = 9;
+    private readonly char BorderChar = '#';
+    private readonly List<string> _road = new();
 
     public Road()
     {
-        _road = new List<string>();
         InitializeRoad();
     }
 
@@ -17,9 +16,9 @@ class Road
     {
         for (int i = 0; i < RoadHeight; i++)
         {
-            if (i == 0 || i == 4 || i == RoadHeight-1)
+            if (i is 0 or 4 or RoadHeight - 1)
             {
-                string roadLine = new string(_borderChar, RoadLength - 1) + "||";
+                string roadLine = new string(BorderChar, RoadLength - 1) + "||";
                 _road.Add(roadLine);
                 continue;
             }
@@ -30,8 +29,8 @@ class Road
     public void PlaceCar(Car car)
     {
         char[,] carShape = car.GetShape();
-        int carHeight = carShape.GetLength(0);
-        int carWidth = carShape.GetLength(1);
+        int carHeight = car.GetHeight();
+        int carWidth = car.GetWidth();
     
         for (int y = 0; y < carHeight; y++)
         {

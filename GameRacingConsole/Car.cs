@@ -2,11 +2,11 @@
 
 class Car
 {
-    private readonly Random _random = new ();
-    private readonly Sprite _carSprite;
     public string Name { get; }
     public int X { get; private set; }
     public int Y { get; private set; }
+    private readonly Random _random = new ();
+    private readonly Sprite _carSprite;
 
     public Car(string name, Sprite sprite)
     {
@@ -31,4 +31,8 @@ class Car
     {
         return _carSprite.SpriteCar;
     }
+
+    public int GetWidth() => GetShape().GetLength(1);
+
+    public int GetHeight() => GetShape().GetLength(0);
 }

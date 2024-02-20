@@ -83,9 +83,8 @@ class Road
                 }
             }
         }
-        
     }
-    
+
     public void Draw()
     {
         Console.CursorVisible = false;

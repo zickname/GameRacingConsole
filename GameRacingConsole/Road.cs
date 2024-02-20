@@ -16,7 +16,7 @@ class Road
 
     private void InitializeRoad()
     {
-        for (var i = 0; i < RoadHeight; i++)
+        for (int i = 0; i < RoadHeight; i++)
         {
             if (i == 0 || i == 4 || i == RoadHeight - 1)
             {

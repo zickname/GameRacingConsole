@@ -11,9 +11,9 @@ class Car
     public Car(string name, char [,] sprite)
     {
         Name = name;
-        this.sprite = sprite;
         X = 0;
         Y = 0;
+        this.sprite = sprite;
     }
     
     public void Move()

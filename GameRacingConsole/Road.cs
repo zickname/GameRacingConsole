@@ -2,88 +2,89 @@
 
 class Road
 {
-    public const int RoadLength = 150;
-    private const int RoadHeight = 9;
-    private readonly char BorderChar = '#';
-    private readonly List<string> _road = new();
+    private int RoadLength { get; }
+    private int RoadHeight { get; }
+    private const char TrackBorderChar = '#';
+    private readonly List<string> _roadLine = new();
 
-    public Road()
+    public Road(int roadLength)
     {
+        RoadLength = roadLength;
+        RoadHeight = 9;
         InitializeRoad();
     }
 
     private void InitializeRoad()
     {
-        for (int i = 0; i < RoadHeight; i++)
+        for (var i = 0; i < RoadHeight; i++)
         {
-            if (i is 0 or 4 or RoadHeight - 1)
+            if (i == 0 || i == 4 || i == RoadHeight - 1)
             {
-                string roadLine = new string(BorderChar, RoadLength - 1) + "||";
-                _road.Add(roadLine);
+                var roadLine = new string(TrackBorderChar, RoadLength) + "||";
+                _roadLine.Add(roadLine);
                 continue;
             }
-            _road.Add(new string(' ', RoadLength-1) + "||");
+
+            _roadLine.Add(new string(' ', RoadLength) + "||");
         }
     }
 
+    public int getRoadLength() => RoadLength;
+
     public void PlaceCar(Car car)
     {
-        char[,] carShape = car.GetShape();
+        char[,] carShape = car.GetCarSprite();
         int carHeight = car.GetHeight();
         int carWidth = car.GetWidth();
-    
+
         for (int y = 0; y < carHeight; y++)
         {
+            int posY = car.Y + y;
+
             for (int x = 0; x < carWidth; x++)
             {
                 int posX = car.X + x;
-                int posY = car.Y + y;
-                
-                if (car.X + carWidth > RoadLength-1)
-                {
-                    posX = RoadLength - carWidth - 1 + x;
-                }
+
+                if (car.X > RoadLength) posX = RoadLength + x;
 
                 char carPixel = carShape[y, x];
 
                 if (carPixel == ' ') continue;
-                
-                string roadLine = _road[posY];
-                roadLine = roadLine.Remove(posX, 1).Insert(posX, carPixel.ToString());
-                _road[posY] = roadLine;
+
+                string roadLine = _roadLine[posY];
+                roadLine = roadLine.Remove(posX - carWidth, 1).Insert(posX - carWidth, carPixel.ToString());
+                _roadLine[posY] = roadLine;
             }
         }
     }
 
     public void RemoveCar(Car car)
     {
-        char[,] carShape = car.GetShape();
+        char[,] carShape = car.GetCarSprite();
         int carHeight = carShape.GetLength(0);
         int carWidth = carShape.GetLength(1);
 
         for (int y = 0; y < carHeight; y++)
         {
+            int posY = car.Y + y;
+
             for (int x = 0; x < carWidth; x++)
             {
                 int posX = car.X + x;
-                int posY = car.Y + y;
 
-                if (car.X + carWidth > RoadLength - 1)
-                {
-                    posX = RoadLength - carWidth - 1 + x;
-                }
+                if (car.X > RoadLength) posX = RoadLength + x;
 
-                string roadLine = _road[posY];
-                roadLine = roadLine.Remove(posX, 1).Insert(posX, ' '.ToString());
-                _road[posY] = roadLine;
+                string roadLine = _roadLine[posY];
+                roadLine = roadLine.Remove(posX - carWidth, 1).Insert(posX - carWidth, ' '.ToString());
+                _roadLine[posY] = roadLine;
             }
         }
     }
-    
+
     public void Draw()
     {
         Console.CursorVisible = false;
-        foreach (var roadLine in _road)
+        foreach (var roadLine in _roadLine)
         {
             Console.WriteLine(roadLine);
         }

@@ -87,6 +87,7 @@ class Road
 
     public void Draw()
     {
+        Console.SetCursorPosition(0, 0);
         Console.CursorVisible = false;
         foreach (var roadLine in _roadLine)
         {

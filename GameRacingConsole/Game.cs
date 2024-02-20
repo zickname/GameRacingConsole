@@ -21,7 +21,6 @@ class Game
         Console.WriteLine("Гонка начинается!");
         while (!_raceOver)
         {
-            Console.SetCursorPosition(0, 0);
             _road.PlaceCar(_cars);
             _road.Draw();
             CheckWinner();

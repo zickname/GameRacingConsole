@@ -3,33 +3,25 @@
 class Car
 {
     public string Name { get; }
+    public char [,] sprite { get; private set; }
+    public int Width { get; private set; }
+    public int Height { get; private set; }
     public int X { get; private set; }
     public int Y { get; private set; }
     private readonly Random _random = new ();
-    private readonly char [,] sprite;
 
-    public Car(string name, char [,] sprite)
+    public Car(string name, char [,] sprite, (int, int) position)
     {
         Name = name;
-        X = 0;
-        Y = 0;
         this.sprite = sprite;
+        Width = sprite.GetLength(1);
+        Height = sprite.GetLength(0);
+        X = position.Item1 + Width;
+        Y = position.Item2;
     }
     
     public void Move()
     {
         X += _random.Next(1, 3); // Случайное число от 1 до 5 для перемещения по горизонтали
     }
-
-    public void SetPosition(int x, int y)
-    {
-        X = x + sprite.GetLength(1);
-        Y = y;
-    }
-
-    public char[,] GetCarSprite() => sprite;
-
-    public int GetWidth() => GetCarSprite().GetLength(1);
-
-    public int GetHeight() => GetCarSprite().GetLength(0);
 }

@@ -1,11 +1,15 @@
 ﻿namespace GameRacingConsole;
 
-public struct Sprite
+public class Sprite
 {
-    static public readonly char[,] SpriteCar =
+    public static readonly char[,] SpriteCar = new char[,]
     {
-            { ' ', ' ', '_', '_', '_', ' ', ' ', ' ', ' ', ' ' },
-            { ' ', '/', '_', '|', '_', '\\', '_', '_', '_', ' ' },
-            { '(', '0', '-', '-', '-', '-', '0', ')', '-', ')' }
-        };
+        { ' ', ' ', '_', '_', '_', ' ', ' ', ' ', ' ', ' ' },
+        { ' ', '/', '_', '|', '_', '\\', '_', '_', '_', ' ' },
+        { '(', '0', '-', '-', '-', '-', '0', ')', '-', ')' }
+    };
+
+    public Sprite()
+    {
+    }
 }

@@ -2,12 +2,10 @@
 
 class Game
 {
-    private readonly Car[] _cars = new[]
-    {
+    private readonly Car[] _cars = {
         new Car("Машина 1", Sprite.SpriteCar, (0, 1)),
         new Car("Машина 2", Sprite.SpriteCar, (0, 5))
     };
-
     private readonly Road _road = new(100);
     private bool _raceOver;
 
@@ -29,7 +27,6 @@ class Game
             {
                 car.Move();
             }
-
             Thread.Sleep(100); // Для эффекта анимации, если нужно
         }
     }
@@ -59,7 +56,8 @@ class Game
             ShowInfo($"{_cars[winnerIndex].Name} победил!");
         }
     }
-
+    
+    
     private static void ShowInfo(string message)
     {
         Console.WriteLine(message);
